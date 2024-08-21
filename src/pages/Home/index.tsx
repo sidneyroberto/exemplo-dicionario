@@ -1,11 +1,11 @@
-import { CSSProperties, useCallback, useContext, useState } from 'react';
-import { ClockLoader } from 'react-spinners';
+import { CSSProperties, useCallback, useContext, useState } from "react";
+import { ClockLoader } from "react-spinners";
 
-import WordCard from '../../components/WordCard';
-import { setWords } from '../../context/Actions';
-import UserContext from '../../context/UserContext';
-import { Word, isInstanceOfWordNotFound } from '../../models/Word';
-import { WordService } from '../../services/WordService';
+import WordCard from "../../components/WordCard";
+import { setWords } from "../../context/Actions";
+import UserContext from "../../context/UserContext";
+import { Word, isInstanceOfWordNotFound } from "../../models/Word";
+import { WordService } from "../../services/WordService";
 import {
   HomeContainer,
   NoResultsFoundMessage,
@@ -13,16 +13,16 @@ import {
   SearchButton,
   SearchInput,
   SearchPanel,
-} from './styles';
+} from "./styles";
 
 const wordService = new WordService();
 const loadingCssOverride: CSSProperties = {
-  margin: '10px auto',
+  margin: "10px auto",
 };
-const loadingColor = '#392e4a';
+const loadingColor = "#392e4a";
 
 const Home = () => {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [noWordFound, setNoWordFound] = useState(false);
 
@@ -40,7 +40,7 @@ const Home = () => {
       } else {
         const words = response as Word[];
         setWords(dispatch, words);
-        setFilter('');
+        setFilter("");
       }
 
       setIsSearching(false);
@@ -51,14 +51,14 @@ const Home = () => {
     <HomeContainer>
       <SearchPanel>
         <SearchInput
-          data-cy='search-input'
+          data-cy="search-input"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
         />
 
         <SearchButton
-          data-cy='search-button'
-          value='Buscar'
+          data-cy="search-button"
+          value="Buscar"
           disabled={isSearching}
           onClick={searchWords}
         />
@@ -71,7 +71,7 @@ const Home = () => {
       {!isSearching && words.length > 0 && (
         <>
           <ResultsFoundMessage>
-            {words.length} resultado(s) encontrado(s)
+            {words.length} termo(s) encontrado(s)
           </ResultsFoundMessage>
 
           {words.map((w, index) => (
@@ -81,9 +81,7 @@ const Home = () => {
       )}
 
       {!isSearching && noWordFound && (
-        <NoResultsFoundMessage>
-          Nenhuma palavra encontrada
-        </NoResultsFoundMessage>
+        <NoResultsFoundMessage>Nenhum termo encontrada</NoResultsFoundMessage>
       )}
     </HomeContainer>
   );
